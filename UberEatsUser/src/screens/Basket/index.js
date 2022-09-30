@@ -1,6 +1,8 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, Pressable } from "react-native";
 import restaurants from "../../../assets/data/restaurants.json";
 import BasketDishItem from "../../components/BasketDishItem";
+import { useNavigation } from "@react-navigation/native"
+
 
 const restaurant = restaurants[0];
 
