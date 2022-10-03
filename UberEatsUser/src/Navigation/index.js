@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Foundation, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
-
 import HomeScreen from "../screens/HomeScreen";
 import RestaurantDetailsScreen from "../screens/RestaurantDetailsScreen";
 import DishDetailsScreen from "../screens/DishDetailsScreen";
@@ -9,14 +8,21 @@ import Basket from "../screens/Basket";
 import OrdersScreen from "../screens/OrdersScreen";
 import OrderDetails from "../screens/OrderDetails";
 import ProfileScreen from "../screens/ProfileScreen";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const RootNavigator = () => {
+  const { dbUser } = useAuthContext();
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeTabs" component={HomeTabs} />
+      {dbUser ? (
+        <Stack.Screen name="HomeTabs" component={HomeTabs} />
+      ) : (
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      )}
     </Stack.Navigator>
   );
 };
@@ -37,7 +43,7 @@ const HomeTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Orders"
+        name="OrdersTab"
         component={OrderStackNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -80,7 +86,7 @@ const OrderStack = createStackNavigator();
 const OrderStackNavigator = () => {
   return (
     <OrderStack.Navigator>
-      <OrderStack.Screen name="OrdersScreen" component={OrdersScreen} />
+      <OrderStack.Screen name="Orders" component={OrdersScreen} />
       <OrderStack.Screen name="Order" component={OrderDetails} />
     </OrderStack.Navigator>
   );
