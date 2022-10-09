@@ -1,9 +1,17 @@
 import { Text, View, Image, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
+import { DataStore } from "aws-amplify";
+import { User } from "../../models";
 
 const OrderItem = ({ order }) => {
+  const [user, setUser] = useState(null)
   const navigation = useNavigation();
+
+  useEffect(() => {
+    DataStore.query(User, order.userId).then(setUser)
+  }, [])
 
   return (
     <Pressable
@@ -32,8 +40,8 @@ const OrderItem = ({ order }) => {
         </Text>
         <Text style={{ color: "grey" }}>{order.Restaurant.address}</Text>
         <Text style={{ marginTop: 10 }}>Delivery Details</Text>
-        <Text style={{ color: "grey" }}>{order.User.name}</Text>
-        <Text style={{ color: "grey" }}>{order.User.address}</Text>
+        <Text style={{ color: "grey" }}>{user?.name}</Text>
+        <Text style={{ color: "grey" }}>{user?.address}</Text>
       </View>
       <View
         style={{
