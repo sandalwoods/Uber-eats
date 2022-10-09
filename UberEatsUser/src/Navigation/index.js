@@ -9,6 +9,7 @@ import OrdersScreen from "../screens/OrdersScreen";
 import OrderDetails from "../screens/OrderDetails";
 import ProfileScreen from "../screens/ProfileScreen";
 import { useAuthContext } from "../contexts/AuthContext";
+import OrderDetailsNavigator from "./OrderDetailsNavigator";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -87,7 +88,7 @@ const OrderStackNavigator = () => {
   return (
     <OrderStack.Navigator>
       <OrderStack.Screen name="Orders" component={OrdersScreen} />
-      <OrderStack.Screen name="Order" component={OrderDetails} />
+      <OrderStack.Screen name="Order" component={OrderDetailsNavigator} />
     </OrderStack.Navigator>
   );
 };

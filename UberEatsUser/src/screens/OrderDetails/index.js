@@ -1,13 +1,13 @@
 import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
-// import orders from "../../../assets/data/orders.json";
-import restaurants from "../../../assets/data/restaurants.json";
+import orders from "../../../assets/data/orders.json";
+// import restaurants from "../../../assets/data/restaurants.json";
 import styles from "./styles";
 import BasketDishItem from "../../components/BasketDishItem";
 import { useOrderContext } from "../../contexts/OrderContext";
 import { useState, useEffect } from "react";
-import { useRoute } from "@react-navigation/native";
+// import { useRoute } from "@react-navigation/native";
 
-// const order = orders[0];
+const order = orders[0];
 
 const OrderDetailsHeader = ({ order }) => {
   return (
@@ -26,11 +26,11 @@ const OrderDetailsHeader = ({ order }) => {
   );
 };
 
-const OrderDetails = () => {
+const OrderDetails = ({ id }) => {
   const [order, setOrder] = useState();
   const { getOrder } = useOrderContext();
-  const route = useRoute();
-  const id = route.params?.id;
+  // const route = useRoute();
+  // const id = route.params?.id;
 
   useEffect(() => {
     getOrder(id).then(setOrder);
